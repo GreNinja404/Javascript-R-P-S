@@ -12,4 +12,19 @@ const getComputerChoice = (choices) =>{
     }
 }
 
-let computerChoice = getComputerChoice();
+//Logic for user choices
+const getHumanChoice = (choices) =>{
+    let choice = prompt("Choose 1: 'Rock', 'Paper', 'Scissor': ");
+    if(choice == 'Rock'){
+        console.log("Rock");
+    }else if(choice == 'Paper'){
+        console.log("Paper");
+    }else if(choice == 'Scissor'){
+        console.log("Scissor");
+    }else{
+        alert("Invalid choice: RETRY");
+    }
+}
+
+//let computerChoice = getComputerChoice();
+let humanChoice = getHumanChoice();
