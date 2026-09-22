@@ -1,5 +1,4 @@
-let humanScore = 0;
-let computerScore = 0;
+
 //let computer choose between 1 to 3 randomly
 const getComputerChoice = () => {
     let random = Math.floor(Math.random() *3) + 1;
@@ -24,43 +23,67 @@ const getHumanChoice = () =>{
 }
 
 
+//runs the whole game
+const playGame = () => {
+    let humanScore = 0;
+    let computerScore = 0;
 
-const playRound = (humanChoice, computerChoice) => {
+    const playRound = (humanChoice, computerChoice) => { //initialized inside the game function so that it can be called with the loop
+        //human scoring logic                                      
+        if(computerChoice === humanChoice){
+            console.log("It's a tie");
+            return;
+        }
+        
+        if((humanChoice === "Rock" && computerChoice === "Scissor")){
+            humanScore++;
+            console.log(`Player won! ${humanChoice} beats ${computerChoice}`)
+        }else if(humanChoice === "Paper" && computerChoice === "Rock"){
+            humanScore++;                                                       // logic for human choices
+            console.log(`Player won! ${humanChoice} beats ${computerChoice}`)
+        }else if(humanChoice === "Scissor" && computerChoice === "Paper"){
+            humanScore++;
+            console.log(`Player won! ${humanChoice} beats ${computerChoice}`)
+        }
 
-    if(computerChoice === humanChoice){
-        console.log("It's a tie");
-        return;
+        //computer scoring logic 
+        if((computerChoice === "Rock" && humanChoice === "Scissor")){
+            computerScore++;
+            console.log(`Computer won! ${computerChoice} beats ${humanChoice}`)
+        
+        }else if(computerChoice === "Paper" && humanChoice === "Rock"){         //logic for computer choices
+            computerScore++;
+            console.log(`Computer won! ${computerChoice} beats ${humanChoice}`)
+        }else if(computerChoice === "Scissor" && humanChoice === "Paper"){
+            computerScore++;
+            console.log(`Computer won! ${computerChoice} beats ${humanChoice}`)
+        }
     }
     
-    if((humanChoice === "Rock" && computerChoice === "Scissor")){
-        humanScore++;
-        console.log(`Player won! ${humanChoice} beats ${computerChoice}`)
-    }else if(humanChoice === "Paper" && computerChoice === "Rock"){
-        humanScore++;                                                       // logic for human choices
-        console.log(`Player won! ${humanChoice} beats ${computerChoice}`)
-    }else if(humanChoice === "Scissor" && computerChoice === "Paper"){
-        humanScore++;
-        console.log(`Player won! ${humanChoice} beats ${computerChoice}`)
-    }
+    //loop to run 5 rounds and check if 5 rounds is achieved
+    for(i = 1; i < 5; i++){
+            console.log(`---Round${i}---`);
 
+            const humanSelection = getHumanChoice();
+            const computerSelection = getComputerChoice();
 
-    if((computerChoice === "Rock" && humanChoice === "Scissor")){
-        computerScore++;
-        console.log(`Computer won! ${computerChoice} beats ${humanChoice}`)
-       
-    }else if(computerChoice === "Paper" && humanChoice === "Rock"){         //logic for computer choices
-        computerScore++;
-        console.log(`Computer won! ${computerChoice} beats ${humanChoice}`)
-    }else if(computerChoice === "Scissor" && humanChoice === "Paper"){
-        computerScore++;
-        console.log(`Computer won! ${computerChoice} beats ${humanChoice}`)
-    }
+            playRound(humanSelection,computerSelection);
+        }
+        
+        console.log("===Final Score===");
+        console.log(`Player:${humanScore} || Computer:${computerScore}`);   //tracks final score
 
+        if(humanScore > computerScore){
+        console.log("Player Won!");  
+        }else if(computerScore > humanScore){       //show scores
+            console.log("Computer Won!")
+        }else{
+            console.log("Game is a tie!")
+        }
+    
+
+    
 }
 
-
-const humanSelection = getHumanChoice();
-const computerSelection = getComputerChoice();
-
-playRound(humanSelection, computerSelection);
-console.log(`Score: Player: ${humanScore} || Computer: ${computerScore}`)
+//starts the whole game
+playGame();
